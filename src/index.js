@@ -24,7 +24,7 @@ function drawBoard() {
     document.querySelector(".result").textContent = "빙고!";
     document.querySelector(".play-again").classList.add("open");
   } else {
-    document.querySelector(".result").textContent = " ";
+    document.querySelector(".result").textContent = "";
     document.querySelector(".play-again").classList.remove("open");
   }
 }
@@ -87,23 +87,15 @@ function bingo(arr) {
   return false;
 }
 
-document.querySelectorAll(".row").forEach((rowEl, rowIndex) => {
-  // 요소에서도 querySelectorAll 만들수 있음
-  rowEl.querySelectorAll(".col").forEach((colEl, colIndex) => {
-    colEl.addEventListener("click", e => {
-      boardState[rowIndex][colIndex] = 1;
-      drawBoard();
-    });
-  });
-});
-
 // 빙고가 되면 체크 못하게 하는 코드
 document.querySelectorAll(".row").forEach((rowEl, rowIndex) => {
   rowEl.querySelectorAll(".col").forEach((colEl, colIndex) => {
-    if (!bingo(boardState)) {
-      boardState[rowIndex][colIndex] = 1;
-      drawBoard();
-    }
+    colEl.addEventListener("click", e => {
+      if (!bingo(boardState)) {
+        boardState[rowIndex][colIndex] = 1;
+        drawBoard();
+      }
+    });
   });
 });
 
@@ -117,6 +109,6 @@ document.querySelector(".play-again").addEventListener("click", e => {
     [0, 0, 0, 0, 0]
   ];
   drawBoard();
-  document.querySelector(".play-again").classList.remove("open");
 });
+
 drawBoard();
