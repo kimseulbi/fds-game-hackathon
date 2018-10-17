@@ -1,3 +1,5 @@
+# 폴더 무시 
+.vscode/
 # Parcel
 .cache/
 dist/
